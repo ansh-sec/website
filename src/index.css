@@ -286,10 +286,10 @@ body {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
   }
+  .nav-grid-logo { justify-self: start; }
+  .nav-grid-menu { justify-self: center; }
+  .nav-grid-cta { justify-self: end; }
 }
-.nav-grid-logo { justify-self: start; }
-.nav-grid-menu { justify-self: center; }
-.nav-grid-cta { justify-self: end; }
 
 /* ===========================================================
    BASE STYLES
