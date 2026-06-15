@@ -39,9 +39,9 @@ export function Navbar() {
       <motion.header
         initial={false}
         animate={{
-          top: state === "floating" ? 20 : 0,
-          left: state === "floating" ? 20 : 0,
-          right: state === "floating" ? 20 : 0,
+          top: state === "floating" ? "max(env(safe-area-inset-top), 0.5rem)" : "env(safe-area-inset-top)",
+          left: state === "floating" ? "max(env(safe-area-inset-left), 0.75rem)" : 0,
+          right: state === "floating" ? "max(env(safe-area-inset-right), 0.75rem)" : 0,
           paddingTop: state === "floating" ? 10 : 22,
           paddingBottom: state === "floating" ? 10 : 22,
           paddingLeft: state === "floating" ? 16 : 28,
@@ -113,14 +113,14 @@ export function Navbar() {
           <div className="nav-grid-cta flex items-center gap-3">
             <Link
               to="/contact"
-              className="hidden md:inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-medium text-midnight bg-gradient-to-br from-champagne to-sage hover:from-ivory hover:to-misty-sage transition-all shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_8px_24px_-8px_rgba(199,216,201,0.35)]"
+              className="hidden md:inline-flex min-h-11 items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-medium text-midnight bg-gradient-to-br from-champagne to-sage hover:from-ivory hover:to-misty-sage transition-all shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_8px_24px_-8px_rgba(199,216,201,0.35)]"
             >
               <Phone className="w-3.5 h-3.5" strokeWidth={2.2} />
               Book Consultation
             </Link>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden w-10 h-10 rounded-full glass flex items-center justify-center"
+              className="lg:hidden w-11 h-11 rounded-full glass flex items-center justify-center touch-manipulation"
               aria-label="Menu"
             >
               {mobileOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -137,7 +137,13 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.98 }}
             transition={SPRING}
-            className="fixed inset-x-4 top-20 z-40 lg:hidden glass-strong rounded-3xl p-5 shadow-2xl"
+            className="fixed z-40 lg:hidden glass-strong rounded-3xl p-5 shadow-2xl"
+            style={{
+              top: "calc(env(safe-area-inset-top) + 4.75rem)",
+              left: "max(env(safe-area-inset-left), 1rem)",
+              right: "max(env(safe-area-inset-right), 1rem)",
+              paddingBottom: "max(env(safe-area-inset-bottom), 1rem)",
+            }}
           >
             <nav className="flex flex-col gap-1">
               {NAV_LINKS.map((link) => (
@@ -146,7 +152,7 @@ export function Navbar() {
                   to={link.to}
                   end={link.to === "/"}
                   className={({ isActive }) =>
-                    `px-4 py-3.5 rounded-2xl text-[15px] font-medium transition-colors ${
+                    `px-4 py-3.5 min-h-11 rounded-2xl flex items-center text-[15px] font-medium transition-colors ${
                       isActive ? "bg-white/10 text-text-primary" : "text-text-secondary hover:bg-white/5 hover:text-text-primary"
                     }`
                   }
@@ -157,7 +163,7 @@ export function Navbar() {
             </nav>
             <Link
               to="/contact"
-              className="mt-3 flex items-center justify-center gap-2 rounded-full px-5 py-3.5 text-[14px] font-medium text-midnight bg-gradient-to-br from-champagne to-sage"
+              className="mt-3 min-h-11 flex items-center justify-center gap-2 rounded-full px-5 py-3.5 text-[14px] font-medium text-midnight bg-gradient-to-br from-champagne to-sage"
             >
               <Phone className="w-3.5 h-3.5" />
               Book Consultation

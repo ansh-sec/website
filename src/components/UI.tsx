@@ -17,7 +17,7 @@ export function Section({
   innerClassName?: string;
 }) {
   return (
-    <section id={id} className={clsx("relative py-16 md:py-24 lg:py-28 px-5 md:px-8 lg:px-10", className)}>
+    <section id={id} className={clsx("relative py-14 md:py-24 lg:py-28 px-4 sm:px-5 md:px-8 lg:px-10", className)}>
       <div className={clsx("max-w-7xl mx-auto relative", innerClassName)}>{children}</div>
     </section>
   );
@@ -118,7 +118,7 @@ export function PrimaryButton({
   type?: "button" | "submit";
 }) {
   const cls = clsx(
-    "inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-midnight bg-gradient-to-br from-champagne to-sage hover:from-ivory hover:to-misty-sage transition-all shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_10px_30px_-10px_rgba(199,216,201,0.35)]",
+    "inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-medium text-midnight bg-gradient-to-br from-champagne to-sage hover:from-ivory hover:to-misty-sage transition-all shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_10px_30px_-10px_rgba(199,216,201,0.35)] touch-manipulation",
     className
   );
   if (to) return <Link to={to} className={cls}>{children}<ArrowRight className="w-3.5 h-3.5" /></Link>;
@@ -138,7 +138,7 @@ export function SecondaryButton({
   className?: string;
 }) {
   const cls = clsx(
-    "inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-text-primary glass hover:bg-white/10 transition-all",
+    "inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-medium text-text-primary glass hover:bg-white/10 transition-all touch-manipulation",
     className
   );
   if (to) return <Link to={to} className={cls}>{children}</Link>;
