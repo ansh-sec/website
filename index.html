@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#050608" />
+    <meta name="description" content="JOT Wellness — India's premium child development ecosystem. Licensed, in-home therapy, psychology, and wellness for children in Delhi NCR. Guided Growth for every family." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <title>JOT Wellness — Premium Child Development & Family Wellness</title>
+    <style>
+      html, body { background: #050608; color: #F5F3EE; margin: 0; font-family: 'Inter', system-ui, sans-serif; }
+      #root-loader {
+        position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+        background: radial-gradient(ellipse at center, #183B2D 0%, #0D241A 40%, #050608 100%);
+        z-index: 9999; transition: opacity 0.4s ease;
+      }
+      #root-loader .logo {
+        width: 60px; height: 60px; border-radius: 50%;
+        background: linear-gradient(135deg, #C7D8C9 0%, #25604A 100%);
+        display: flex; align-items: center; justify-content: center;
+        font-family: 'Cormorant Garamond', serif; font-size: 28px; color: #050608;
+        animation: pulse 1.6s ease-in-out infinite;
+      }
+      @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.9; } 50% { transform: scale(1.05); opacity: 1; } }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="root-loader"><div class="logo">J</div></div>
+    <script>
+      // Hide loader once React mounts
+      window.addEventListener('load', function() {
+        var check = setInterval(function() {
+          var root = document.getElementById('root');
+          if (root && root.children.length > 0) {
+            var loader = document.getElementById('root-loader');
+            if (loader) {
+              loader.style.opacity = '0';
+              setTimeout(function() { loader.remove(); }, 500);
+            }
+            clearInterval(check);
+          }
+        }, 50);
+      });
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
