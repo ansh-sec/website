@@ -28,6 +28,13 @@
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
 }
 
+:root {
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+}
+
 /* ===========================================================
    BASE
    =========================================================== */
@@ -40,6 +47,10 @@ html, body {
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
   line-height: 1.6;
+}
+
+body {
+  padding-bottom: var(--safe-bottom);
 }
 
 * { box-sizing: border-box; }
@@ -278,6 +289,14 @@ html, body {
    =========================================================== */
 html { scroll-behavior: smooth; }
 
+button,
+[role="button"],
+input,
+select,
+textarea {
+  touch-action: manipulation;
+}
+
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: #0A1C14; }
 ::-webkit-scrollbar-thumb { background: #25604A; border-radius: 10px; }
@@ -310,6 +329,60 @@ html { scroll-behavior: smooth; }
 
 /* Prevent horizontal overflow */
 body, main { overflow-x: hidden; }
+
+h1, h2, h3, h4, p {
+  overflow-wrap: break-word;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass,
+  .glass-strong,
+  .glass-light {
+    background: rgba(13, 36, 26, 0.82);
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+}
+
+@media (max-width: 768px) {
+  .h-display { font-size: clamp(2.1rem, 10vw, 3.4rem); line-height: 1.08; }
+  .h1 { font-size: clamp(1.9rem, 8.2vw, 2.8rem); line-height: 1.12; }
+  .h2 { font-size: clamp(1.55rem, 6.9vw, 2.25rem); line-height: 1.16; }
+  .h3 { font-size: clamp(1.3rem, 5.5vw, 1.8rem); line-height: 1.2; }
+  .p-body { font-size: 0.975rem; line-height: 1.65; }
+  .p-lead { font-size: 1.05rem; line-height: 1.55; }
+
+  .bg-breathing::before,
+  .bg-breathing::after,
+  .bg-mesh-1,
+  .bg-mesh-2,
+  .bg-mesh-3,
+  .bg-mesh-4 {
+    filter: blur(72px);
+  }
+
+  .bg-mesh-1,
+  .bg-mesh-2,
+  .bg-mesh-3,
+  .bg-mesh-4 {
+    animation: none;
+    opacity: 0.75;
+  }
+
+  .glass {
+    backdrop-filter: blur(16px) saturate(125%);
+    -webkit-backdrop-filter: blur(16px) saturate(125%);
+  }
+
+  .glass-strong {
+    backdrop-filter: blur(18px) saturate(130%);
+    -webkit-backdrop-filter: blur(18px) saturate(130%);
+  }
+
+  .glass-light {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
 
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {

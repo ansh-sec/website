@@ -57,7 +57,7 @@ function HeroSlider() {
   const swiperRef = useRef<any>(null);
 
   return (
-    <section className="relative min-h-screen flex items-center pt-32 md:pt-36 pb-16 md:pb-20 px-5 md:px-8 lg:px-10 overflow-hidden">
+    <section className="relative min-h-[85svh] md:min-h-screen flex items-center pt-24 md:pt-36 pb-12 md:pb-20 px-4 sm:px-5 md:px-8 lg:px-10 overflow-hidden">
       {/* Luminous atmospheric layers */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Large center glow — illuminated, sage */}
@@ -112,6 +112,8 @@ function HeroSlider() {
             speed={1200}
             autoplay={{ delay: 6000, disableOnInteraction: false }}
             allowTouchMove={true}
+            touchStartPreventDefault={false}
+            threshold={8}
             fadeEffect={{ crossFade: true }}
             onSlideChange={(s) => setCurrent(s.realIndex)}
             onSwiper={(s) => (swiperRef.current = s)}
@@ -123,13 +125,13 @@ function HeroSlider() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.9 }}
-                  className="min-h-[440px] sm:min-h-[480px] md:min-h-[520px] flex flex-col justify-center"
+                  className="min-h-[320px] sm:min-h-[420px] md:min-h-[520px] flex flex-col justify-center"
                 >
                   <div className="inline-flex items-center gap-2 text-[10px] sm:text-[11px] tracking-[0.25em] sm:tracking-[0.3em] uppercase text-sage mb-5 md:mb-6">
                     <Sparkles className="w-3 h-3" />
                     <span className="whitespace-normal">{slide.eyebrow}</span>
                   </div>
-                  <h1 className="font-editorial text-[clamp(2.5rem,7vw,6.5rem)] leading-[1.02] text-text-primary mb-5 md:mb-6 tracking-tight">
+                  <h1 className="font-editorial text-[clamp(2rem,8.5vw,6.5rem)] leading-[1.06] md:leading-[1.02] text-text-primary mb-5 md:mb-6 tracking-tight">
                     {slide.title}
                   </h1>
                   <p className="text-base md:text-lg lg:text-xl text-text-secondary leading-relaxed max-w-2xl mb-8 md:mb-10">
@@ -146,17 +148,17 @@ function HeroSlider() {
             <SecondaryButton to="/guided-growth" className="hidden sm:inline-flex">Start Guided Growth</SecondaryButton>
           </div>
 
-          <div className="mt-8 md:mt-10 flex items-center gap-4 md:gap-6">
+          <div className="mt-7 md:mt-10 flex items-center gap-3 md:gap-6">
             <button
               onClick={() => swiperRef.current?.slidePrev()}
-              className="w-10 h-10 md:w-11 md:h-11 rounded-full glass flex items-center justify-center hover:bg-white/10 transition"
+              className="w-11 h-11 md:w-12 md:h-12 rounded-full glass flex items-center justify-center hover:bg-white/10 transition touch-manipulation"
               aria-label="Previous slide"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
             <button
               onClick={() => swiperRef.current?.slideNext()}
-              className="w-10 h-10 md:w-11 md:h-11 rounded-full glass flex items-center justify-center hover:bg-white/10 transition"
+              className="w-11 h-11 md:w-12 md:h-12 rounded-full glass flex items-center justify-center hover:bg-white/10 transition touch-manipulation"
               aria-label="Next slide"
             >
               <ChevronRight className="w-4 h-4" />
@@ -166,14 +168,18 @@ function HeroSlider() {
                 <button
                   key={i}
                   onClick={() => swiperRef.current?.slideTo(i)}
-                  className="relative h-[2px] w-10 md:w-12 bg-white/10 overflow-hidden rounded-full"
+                  className="relative h-11 min-w-11 px-1.5 flex items-center justify-center overflow-hidden rounded-full touch-manipulation"
                   aria-label={`Go to slide ${i + 1}`}
                 >
                   <span
-                    className={`absolute inset-0 bg-sage transition-all duration-500 ${
-                      i === current ? "w-full" : "w-0"
-                    }`}
-                  />
+                    className="block h-[2px] w-8 md:w-10 bg-white/10 overflow-hidden rounded-full"
+                  >
+                    <span
+                      className={`block h-full bg-sage transition-all duration-500 ${
+                        i === current ? "w-full" : "w-0"
+                      }`}
+                    />
+                  </span>
                 </button>
               ))}
             </div>
@@ -534,7 +540,7 @@ export function AssessmentForm() {
   };
 
   return (
-    <form onSubmit={submit} className="grid md:grid-cols-2 gap-5">
+    <form onSubmit={submit} className="grid md:grid-cols-2 gap-4 md:gap-5 [scroll-margin-top:calc(env(safe-area-inset-top)+6rem)]">
       {submitted ? (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -561,8 +567,8 @@ export function AssessmentForm() {
               value={form.concern}
               onChange={(e) => setForm({ ...form, concern: e.target.value })}
               required
-              rows={3}
-              className="w-full glass rounded-2xl px-5 py-4 text-text-primary bg-transparent focus:outline-none focus:border-sage/50 transition"
+              rows={4}
+              className="w-full min-h-32 glass rounded-2xl px-5 py-4 text-base text-text-primary bg-transparent focus:outline-none focus:border-sage/50 transition"
               placeholder="Briefly describe the concern…"
             />
           </div>
@@ -570,7 +576,7 @@ export function AssessmentForm() {
           <div className="flex items-end">
             <button
               type="submit"
-              className="w-full inline-flex items-center justify-center gap-2 rounded-full px-6 py-4 text-sm font-medium text-midnight bg-gradient-to-br from-champagne to-sage hover:from-ivory hover:to-misty-sage transition-all shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_10px_30px_-10px_rgba(199,216,201,0.35)]"
+              className="w-full min-h-11 inline-flex items-center justify-center gap-2 rounded-full px-6 py-4 text-sm font-medium text-midnight bg-gradient-to-br from-champagne to-sage hover:from-ivory hover:to-misty-sage transition-all shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_10px_30px_-10px_rgba(199,216,201,0.35)] touch-manipulation"
             >
               Request free assessment <ArrowRight className="w-3.5 h-3.5" />
             </button>
@@ -591,7 +597,7 @@ function Field({ label, value, onChange, type = "text", placeholder, required }:
         onChange={(e) => onChange(e.target.value)}
         required={required}
         placeholder={placeholder}
-        className="w-full glass rounded-2xl px-5 py-4 text-text-primary bg-transparent focus:outline-none focus:border-sage/50 transition"
+        className="w-full min-h-11 glass rounded-2xl px-5 py-4 text-base text-text-primary bg-transparent focus:outline-none focus:border-sage/50 transition"
       />
     </div>
   );
