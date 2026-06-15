@@ -274,11 +274,18 @@ body {
    NAVIGATION GRID — 3-column with centered nav
    =========================================================== */
 .nav-grid {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 1rem;
   width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .nav-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+  }
 }
 .nav-grid-logo { justify-self: start; }
 .nav-grid-menu { justify-self: center; }
